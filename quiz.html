@@ -88,6 +88,8 @@
     }
 
     window.addEventListener("load", (event) => {
+        window.scrollTo(0, 1);
+        
         for (let item of document.getElementsByClassName("plus_10")) {
             item.onclick = function() {
                 score(item.parentNode.id, 10);
