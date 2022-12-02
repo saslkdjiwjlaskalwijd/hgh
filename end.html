@@ -1,0 +1,59 @@
+<html>
+<head>
+
+<style>
+    .player {
+        float: left;
+        border: 1px solid black;
+        width: 50px;
+        margin-right: 10px;
+    }
+
+    #quiz {
+        border: 1px solid grey;
+        margin: 50px;
+        width: 100px;
+    }
+
+</style>
+
+<script type="text/javascript" src="cookies.js"></script> 
+
+<script>
+       addEventListener('DOMContentLoaded', (event) => {
+
+        for (let item of document.getElementsByClassName("player")) {
+            item.querySelector('.score').innerText = getCookie(item.id) * 1;
+        } 
+
+       });
+</script>
+
+</head>
+
+<body>
+    <div class="player" id="daniel">
+        <div class="score"></div>
+        Daniel
+    </div>
+    <div class="player" id="bernd">
+        <div class="score"></div>
+        Bernd
+    </div>
+    <div class="player" id="lauren">
+        <div class="score"></div>
+        Lauren
+    </div>
+    <div class="player" id="eline">
+        <div class="score"></div>
+        Eline
+    </div>
+    <div class="player" id="mau">
+        <div class="score"></div>
+        Mau
+    </div>
+
+    <div style="clear:both"></div>
+    <div class="pic" id="quiz" onclick="window.location='quiz.html'">Back to quiz</div>
+</body>
+</html>
