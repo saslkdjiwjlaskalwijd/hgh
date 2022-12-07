@@ -1,1 +1,142 @@
-Hello test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+<style>
+    body {
+        background-image: url('img/main.JPG');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        padding: 0px;
+        margin: 0px;
+        overflow: hidden;
+    }
+
+    #welcome {
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        vertical-align: middle;
+        margin-top: 10%;
+        color: white;
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 40pt;
+        letter-spacing: 2pt;
+        color: rgb(209, 159, 71);
+        left: 20%;
+    }
+
+    .flying {
+        position: absolute;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        display: none;
+    }
+
+    #owl1 {
+        width: 200px;
+        height: 300px;
+        background-image: url('img/owl1.PNG');
+    }
+
+    #owl2 {
+        width: 200px;
+        height: 300px;
+        background-image: url('img/owl2.PNG');
+    }
+
+    #owl3 {
+        width: 200px;
+        height: 300px;
+        background-image: url('img/owl3.PNG');
+    }
+
+    #owl4 {
+        width: 200px;
+        height: 300px;
+        background-image: url('img/owl4.PNG');
+    }
+
+    #moon {
+        position: absolute;
+        left: 15%;
+        top: 160px;
+        width: 120px;
+        height: 120px;
+        background-image: url('img/moon.PNG');
+        background-size: 155%;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        box-shadow: 0 0 60px 10px #fff, 0 0 140px 30px #0ff, 0 0 100px 30px #f0f;
+    }
+
+</style>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet"> 
+
+<script type="text/javascript">
+    function fly(element, direction) {
+        let from_y = Math.floor(Math.random() * 70) + '%';
+        let to_y = Math.floor(Math.random() * 70) + '%';
+        let from_x;
+        let to_x;
+        if (direction == 0) { // L > R
+            from_x = '-200px';
+            to_x = (document.body.clientWidth + 200) + 'px';
+        } else {
+            from_x = (document.body.clientWidth + 200) + 'px';
+            to_x = '-200px';
+        }
+
+        element.style.display = 'block';
+
+        anime({
+          targets: element,
+          translateX: [from_x, to_x],
+          translateY: [from_y, to_y],
+          duration: 2000,
+          easing: 'linear',
+          complete: function(anim) {
+            scheduleFlying(element, direction);
+          }
+        });
+    }
+
+    function scheduleFlying(element, direction) {
+        let duration = Math.floor(Math.random() * 10000);
+        setTimeout(
+            function() {
+                fly(element, direction);
+            }, duration
+        );
+    }
+
+
+    window.addEventListener("load", (event) => {
+        scheduleFlying(document.getElementById('owl1'), 0);
+        scheduleFlying(document.getElementById('owl2'), 1);
+        scheduleFlying(document.getElementById('owl3'), 0);
+        scheduleFlying(document.getElementById('owl4'), 0);
+    });
+</script>
+
+</head>
+
+<body>
+
+    <div id="welcome">WELCOME TO THE 2022<br>HOGWARTS QUIZ</div>
+
+    <div id="moon" onclick="window.location = 'quiz.html'"></div>
+
+    <div class="flying" id="owl1"></div>
+    <div class="flying" id="owl2"></div>
+    <div class="flying" id="owl3"></div>
+    <div class="flying" id="owl4"></div>
+</body>
+
+</head>
