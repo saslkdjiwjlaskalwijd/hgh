@@ -90,50 +90,109 @@ body {
 }
 
 .plus_10 {
-    background-color: red;
+/*    background-color: red;*/
     width: 100%;
     height: 50%;
 }
 
 .minus_5 {
-    background-color: green;
+/*    background-color: green;*/
     width: 50%;
     height: 50%;
     float: left;
 }
 
 .plus_5 {
-    background-color: blue;
+/*    background-color: blue;*/
     width: 50%;
     height: 50%;
     float: left;
 }
 
-</style>
+.cloud {
+    background-image: url('img/cloud.PNG');
+    background-position: center;
+    background-repeat: no-repeat;
+/*    border: 5px solid red;*/
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    background-size: 0%;
+    left: -110px;
+    top: -110px;
+
+    font-family: 'Cinzel Decorative', cursive;
+    text-align: center;
+    color: rgba(150, 200, 250, 0);
+    font-size: 100pt;
+    display: none;
+}
+
+.cloud span {
+    position: absolute;
+    top: 110px;
+    left: 110px;
+}</style>
 
 <script type="text/javascript" src="cookies.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet"> 
 
 <script>
     function score(portrait, amount) {
         setCookie(portrait, getCookie(portrait) * 1 + amount);
     }
 
+    function animate(cloud, text) {
+        cloud.innerHTML = '<span>' + text + '</span>';
+        cloud.style.display = 'block';
+        anime({
+            targets: cloud,
+            'background-size': ['0%', '50%', '100%'],
+            opacity: [1, 1, 0],
+            // 'font-size': ['100pt', '100pt'],
+            color: ['rgba(150, 200, 250, 0)', 'rgba(150, 200, 250, 1)', 'rgba(150, 200, 250, 1)'],
+            duration: 1200,
+            easing: 'linear',
+            complete: function(anim) {
+                cloud.style['background-size'] = '0%';
+                cloud.style.display = 'none';
+                cloud.style.color = 'rgba(150, 200, 250, 0)';
+            }
+        })
+    }
+
     window.addEventListener("load", (event) => {
         for (let item of document.getElementsByClassName("plus_10")) {
             item.onclick = function() {
                 score(item.parentNode.id, 10);
+                animate(
+                    item.parentNode.getElementsByClassName('cloud').item(0),
+                    "+10"
+                );
             }
         } 
 
         for (let item of document.getElementsByClassName("plus_5")) {
             item.onclick = function() {
                 score(item.parentNode.id, 5);
+                animate(
+                    item.parentNode.getElementsByClassName('cloud').item(0),
+                    "+5"
+                );
             }
         } 
 
         for (let item of document.getElementsByClassName("minus_5")) {
             item.onclick = function() {
                 score(item.parentNode.id, -5);
+                animate(
+                    item.parentNode.getElementsByClassName('cloud').item(0),
+                    "-5"
+                );
             }
         } 
     });
@@ -144,35 +203,35 @@ body {
 </head>
 <body>
 <div class="portrait" id="daniel">
-<!--         <div class="plus_10"></div>
+        <div class="cloud"></div>
+        <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
-        Daniel
- -->    </div>
+    </div>
     <div class="portrait" id="bernd">
-<!--         <div class="plus_10"></div>
+        <div class="cloud"></div>
+        <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
-        Bernd
- -->    </div>
+    </div>
     <div class="portrait" id="lauren">
-<!--         <div class="plus_10"></div>
+        <div class="cloud"></div>
+        <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
-        Lauren
- -->    </div>
+    </div>
     <div class="portrait" id="eline">
-<!--         <div class="plus_10"></div>
+        <div class="cloud"></div>
+        <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
-        Eline
- -->    </div>
+    </div>
     <div class="portrait" id="mau">
-<!--         <div class="plus_10"></div>
+        <div class="cloud"></div>
+        <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
-        Mau
- -->    </div>
+    </div>
     <div class="portrait" id="choco" onclick="choco()"></div>
     <div class="portrait" id="scores" onclick="window.location='end.html'"></div>
     <div class="portrait" id="snacks" onclick="window.location='snacks.html'"></div>
