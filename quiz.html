@@ -4,55 +4,89 @@
     <link rel="manifest" href="manifest.json">
 <style>
 
-.pic {
-    position: absolute;
-    border: 1px solid black;
-    width: 100px;
-    height: 150px;
-    background-color: lightgray;
+body {
+    background-image: url('img/wall.JPG');
+    background-size: 105%;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
 }
 
-.player {
+.portrait {
     position: absolute;
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-    background-color: lightskyblue;
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    filter:
+        drop-shadow(10px 20px 5px rgb(20, 20, 20))
+        drop-shadow(5px 5px 20px rgb(140, 100, 70))
+        ;
 }
 
 #daniel {
-    left: 100px;
+    left: 160px;
+    width: 200px;
+    height: 200px;
+    background-image: url('img/wiz dani.jpeg');
+    top: 80px;
 }
 
 #bernd {
-    left: 250px;
+    left: 110px;
+    width: 200px;
+    height: 200px;
+    background-image: url('img/wiz bibi.jpeg');
+    top: 580px;
 }
 
 #lauren {
-    left: 450px;
+    left: 921px;
+    width: 200px;
+    height: 200px;
+    background-image: url('img/wiz laurene.jpeg');
+    top: 300px;
 }
 
 #eline {
-    left: 650px;
+    left: 751px;
+    width: 200px;
+    height: 200px;
+    background-image: url('img/wiz eline.jpeg');
+    top: 50px;
 }
 
 #mau {
-    left: 850px;
+    left: 430px;
+    width: 200px;
+    height: 200px;
+    background-image: url('img/wiz maurits.jpeg');
+    top: 490px;
 }
 
 #choco {
     top: 300px;
-    left: 150px;
+    left: 160px;
+    width: 250px;
+    height: 250px;
+    background-image: url('img/frog.png');
 }
 
-#end {
-    top: 300px;
-    left: 350px;
+#scores {
+    top: 510px;
+    left: 690px;
+    width: 300px;
+    height: 300px;
+    background-image: url('img/wizard.png');
 }
 
 #snacks {
-    top: 300px;
-    left: 550px;
+    top: 30px;
+    left: 440px;
+    width: 300px;
+    height: 450px;
+    background-image: url('img/snacks.png');
 }
 
 .plus_10 {
@@ -80,8 +114,8 @@
 <script type="text/javascript" src="cookies.js"></script> 
 
 <script>
-    function score(player, amount) {
-        setCookie(player, getCookie(player) * 1 + amount);
+    function score(portrait, amount) {
+        setCookie(portrait, getCookie(portrait) * 1 + amount);
     }
 
     window.addEventListener("load", (event) => {
@@ -109,38 +143,39 @@
 <body>
 </head>
 <body>
-    <div class="player" id="daniel">
-        <div class="plus_10"></div>
+<div class="portrait" id="daniel">
+<!--         <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
         Daniel
-    </div>
-    <div class="player" id="bernd">
-        <div class="plus_10"></div>
+ -->    </div>
+    <div class="portrait" id="bernd">
+<!--         <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
         Bernd
-    </div>
-    <div class="player" id="lauren">
-        <div class="plus_10"></div>
+ -->    </div>
+    <div class="portrait" id="lauren">
+<!--         <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
         Lauren
-    </div>
-    <div class="player" id="eline">
-        <div class="plus_10"></div>
+ -->    </div>
+    <div class="portrait" id="eline">
+<!--         <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
         Eline
-    </div>
-    <div class="player" id="mau">
-        <div class="plus_10"></div>
+ -->    </div>
+    <div class="portrait" id="mau">
+<!--         <div class="plus_10"></div>
         <div class="minus_5"></div>
         <div class="plus_5"></div>
         Mau
-    </div>
-    <div class="pic" id="choco" onclick="choco()">Choco challenge</div>
-    <div class="pic" id="end" onclick="window.location='end.html'">End screen</div>
-    <div class="pic" id="snacks" onclick="window.location='snacks.html'">Snacks</div>
-</body>
+ -->    </div>
+    <div class="portrait" id="choco" onclick="choco()"></div>
+    <div class="portrait" id="scores" onclick="window.location='end.html'"></div>
+    <div class="portrait" id="snacks" onclick="window.location='snacks.html'"></div>
+     
+ </body>
 </html>
