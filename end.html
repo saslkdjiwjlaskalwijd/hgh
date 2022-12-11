@@ -1,29 +1,134 @@
 <html>
 <head>
+    <link rel="manifest" href="manifest.json">
 
 <style>
-    .player {
-        float: left;
-        border: 1px solid black;
-        width: 50px;
-        margin-right: 10px;
-    }
 
-    #quiz {
-        border: 1px solid grey;
-        margin: 50px;
-        width: 100px;
-    }
+body {
+    background-image: url('img/wall.JPG');
+    background-size: 105%;
+    background-repeat: no-repeat;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.portrait {
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    filter:
+        drop-shadow(10px 20px 5px rgb(20, 20, 20))
+        drop-shadow(5px 5px 20px rgb(140, 100, 70))
+        ;
+
+    width: 150px;
+    height: 200px;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 50px;
+}
+
+#daniel {
+    background-image: url('img/wiz dani.jpeg');
+}
+
+#bernd {
+    background-image: url('img/wiz bibi.jpeg');
+}
+
+#lauren {
+    background-image: url('img/wiz laurene.jpeg');
+}
+
+#eline {
+    background-image: url('img/wiz eline.jpeg');
+}
+
+#mau {
+    background-image: url('img/wiz maurits.jpeg');
+}
+
+.score-tube {
+    width: 140px;
+    height: 380px;
+    border: 1px solid white;
+    position: relative;
+}
+
+.score {
+    width: 70px;
+    height: 0%;
+    background-color: lightblue;
+    position: absolute;
+    bottom: 0;
+    left: 35px;
+}
+
+.score-val {
+    position: absolute;
+    top: -60px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 40pt;
+    color: black;
+}
 
 </style>
 
 <script type="text/javascript" src="cookies.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Henny+Penny&display=swap" rel="stylesheet"> 
+
+
+<script type="text/javascript" src="cookies.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
 
 <script>
+    function animateScore(player, tubeElm, valueElm) {
+        var score = { val: 0 };
+        var playerScore = getCookie(player) * 1;
+        anime({
+            targets: score,
+            val: playerScore,
+            easing: 'linear',
+            duration: 1000,
+            update: function() {
+                valueElm.innerText = Math.ceil(score.val);
+            }
+        });
+
+        var maxScore = 0;
+        for (let item of document.getElementsByClassName("player")) {
+            maxScore = Math.max(maxScore, getCookie(item.querySelector('.portrait').id) * 1);
+        } 
+
+        var perc = playerScore / maxScore * 100;
+
+        anime({
+            targets: tubeElm,
+            easing: 'easeOutQuad',
+            duration: 1000,
+            height: perc  + '%'
+        });
+    }
+
+
        addEventListener('DOMContentLoaded', (event) => {
 
         for (let item of document.getElementsByClassName("player")) {
-            item.querySelector('.score').innerText = getCookie(item.id) * 1;
+            animateScore(
+                item.querySelector('.portrait').id,
+                item.querySelector('.score'),
+                item.querySelector('.score-val'),
+                );
         } 
 
        });
@@ -32,28 +137,57 @@
 </head>
 
 <body>
-    <div class="player" id="daniel">
-        <div class="score"></div>
-        Daniel
-    </div>
-    <div class="player" id="bernd">
-        <div class="score"></div>
-        Bernd
-    </div>
-    <div class="player" id="lauren">
-        <div class="score"></div>
-        Lauren
-    </div>
-    <div class="player" id="eline">
-        <div class="score"></div>
-        Eline
-    </div>
-    <div class="player" id="mau">
-        <div class="score"></div>
-        Mau
+
+    <div class="container">
+
+        <div class="player">
+            <div class="portrait" id="daniel">
+            </div>
+            <div class="score-tube">
+                <div class="score">
+                    <div class="score-val">10</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="player">
+            <div class="portrait" id="bernd">
+            </div>
+            <div class="score-tube">
+                <div class="score">
+                    <div class="score-val">10</div>
+                </div>
+            </div>
+        </div>
+        <div class="player">
+            <div class="portrait" id="lauren">
+            </div>
+            <div class="score-tube">
+                <div class="score">
+                    <div class="score-val">10</div>
+                </div>
+            </div>
+        </div>
+        <div class="player">
+            <div class="portrait" id="eline">
+            </div>
+            <div class="score-tube">
+                <div class="score">
+                    <div class="score-val">10</div>
+                </div>
+            </div>
+        </div>
+        <div class="player">
+            <div class="portrait" id="mau">
+            </div>
+            <div class="score-tube">
+                <div class="score">
+                    <div class="score-val">10</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div style="clear:both"></div>
     <div class="pic" id="quiz" onclick="window.location='quiz.html'">Back to quiz</div>
 </body>
 </html>

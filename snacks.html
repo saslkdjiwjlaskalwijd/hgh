@@ -1,0 +1,115 @@
+<html>
+<head>
+
+<style>
+
+body {
+    background-size: 170%;
+    background-image: url('img/refreshments.JPG');
+    background-repeat: no-repeat;
+    background-position-y: -150px;
+    background-position-x: -250px;
+}
+
+.candle {
+    background-image: url('img/candle1.PNG');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 150px;
+    position: absolute;
+    z-index: 200;
+}
+
+
+#hedwig {
+    position: absolute;
+    background: url('img/hedwig.PNG');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 100px;
+    height: 140px;
+    left: 732px;
+    top: 91px;
+    z-index: 100;
+}
+
+#text {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-family: 'Tangerine', cursive;
+    font-size: 91pt;
+    letter-spacing: 2pt;
+    color: rgb(209, 159, 71);
+    padding-top: 650px;
+    filter: drop-shadow(5px 5px 5px #000);
+}
+
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Henny+Penny&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<script>
+        function moveCandle(candle) {
+            anime({
+                targets: candle,
+                // easing: 'cubicBezier(.5, .05, .1, .3)',
+                easing: 'linear',
+                translateX: function() {
+                  return anime.random(0, 100);
+                },
+                translateY: anime.random(0, 200),
+                rotate: function() {
+                  return anime.random(-5, 5);
+                },
+                duration: anime.random(3000, 7000),
+                // duration: anime.random(2000, 3000),
+                // delay: anime.random(1000, 200),
+                complete: function() {moveCandle(candle);}
+            });
+
+        }
+       addEventListener('DOMContentLoaded', (event) => {
+
+        for (let item of document.getElementsByClassName("candle")) {
+            // item.style.left = anime.random(150, (document.body.clientWidth) - 150) + 'px';
+            // item.style.top = anime.random(50, 300) + 'px';
+
+            setTimeout(
+                function() {
+                    moveCandle(item);
+                }, anime.random(0, 5000)
+            );
+        } 
+
+
+
+
+       });
+</script>
+
+</head>
+
+<body>
+    <div class="candle" style="left: 550px;top: 100px;"></div>
+    <div class="candle" style="left: 100px;top: 60px;"></div>
+    <div class="candle" style="left: 300px;top: 160px;"></div>
+    <div class="candle" style="left: 830px;top: 100px;"></div>
+    <div class="candle" style="left: 990px;top: 130px;"></div>
+    <div class="candle" style="left: 630px;top: 290px;"></div>
+    <div class="candle" style="left: 350px;top: 30px;"></div>
+    <div class="candle" style="left: 1060px;top: 220px;"></div>
+    <div class="candle" style="left: 40px;top: 260px;"></div>
+    <div class="candle" style="left: 490px;top: 280px;"></div>
+
+    <div id="hedwig" onclick="window.location = 'quiz.html'"></div>
+
+    <div id="text">Refreshment Break</div>
+</body>
+
+</html>
