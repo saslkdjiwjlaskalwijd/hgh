@@ -16,15 +16,10 @@ body {
 .portrait {
     background-size: 100%;
     background-repeat: no-repeat;
-
-    filter:
-        drop-shadow(10px 20px 5px rgb(20, 20, 20))
-        drop-shadow(5px 5px 20px rgb(140, 100, 70))
-        ;
-
+    filter: drop-shadow(10px 20px 5px rgb(20, 20, 20)) drop-shadow(5px 5px 20px rgb(140, 100, 70));
     width: 150px;
     height: 200px;
-    margin-bottom: 50px;
+    margin-bottom: -10px;
 }
 
 .container {
@@ -55,9 +50,19 @@ body {
 
 .score-tube {
     width: 140px;
-    height: 380px;
-    border: 1px solid white;
+    height: 490px;
+    /* border: 1px solid white; */
     position: relative;
+    background-image: url('img/tube.PNG');
+    background-size: 69%;
+    background-repeat: no-repeat;
+    background-position-x: 21px;
+    /* padding-top: 10px; */
+        filter:
+        drop-shadow(10px 10px 20px rgb(30, 30, 50))
+
+        ;
+
 }
 
 .score {
@@ -65,16 +70,56 @@ body {
     height: 0%;
     background-color: lightblue;
     position: absolute;
-    bottom: 0;
+    bottom: 45px;
     left: 35px;
 }
 
 .score-val {
     position: absolute;
-    top: -60px;
+    top: -68px;
     font-family: 'Cinzel Decorative', cursive;
     font-size: 40pt;
     color: black;
+    width: 70px;
+    text-align: center;
+    /* border: 1px solid red; */
+}
+
+.score-wrapper {
+    position: absolute;
+    height: 341px;
+    bottom: 0;
+}
+
+#winner {
+    position: absolute;
+    background-size: 100%;
+    width: 530px;
+    height: 670px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 100;
+    background-repeat: no-repeat;
+    top: 140px;
+    display: none; 
+}
+
+.giphy-embed {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+}
+
+#quiz {
+    background-image: url('img/filch.PNG');
+    background-size: 100%;
+    width: 220px;
+    height: 280px;
+    position: absolute;
+    bottom: -10px;
 }
 
 </style>
@@ -120,6 +165,41 @@ body {
         });
     }
 
+    function winner(elm) {
+        document.getElementById('winner').style['background-image'] = getComputedStyle(elm)['background-image'];
+
+        var tl = anime.timeline({
+        });
+
+        tl.add({
+            targets: document.getElementById('winner'),
+            scale: [0, 1],
+            duration: 700,
+            begin: function(anim) {
+                document.getElementById('winner').style.display = 'block';
+            }
+        });
+
+        tl.add({
+            targets: '.giphy-embed',
+            scale: [0, 1],
+            duration: 300,
+            begin: function(anim) {
+                for (let item of document.getElementsByClassName("giphy-embed")) {
+                    item.style.display = 'block';
+                }
+            },
+            delay: anime.stagger(2500)
+        });
+
+        tl.add({
+            targets: '.giphy-embed',
+            rotate: '1turn',
+            loop: true,
+            duration: 5000,
+        });
+    }
+
 
        addEventListener('DOMContentLoaded', (event) => {
 
@@ -129,6 +209,10 @@ body {
                 item.querySelector('.score'),
                 item.querySelector('.score-val'),
                 );
+
+            item.querySelector('.portrait').onclick = function(ev) { 
+                winner(ev.target);
+            };
         } 
 
        });
@@ -144,8 +228,10 @@ body {
             <div class="portrait" id="daniel">
             </div>
             <div class="score-tube">
-                <div class="score">
-                    <div class="score-val">10</div>
+                <div class="score-wrapper">
+                    <div class="score" style="background-color: 23a369;">
+                        <div class="score-val" style="color: 005826;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,8 +240,10 @@ body {
             <div class="portrait" id="bernd">
             </div>
             <div class="score-tube">
-                <div class="score">
-                    <div class="score-val">10</div>
+                <div class="score-wrapper">
+                    <div class="score" style="background-color: 236996">
+                    <div class="score-val" style="color: 003663"></div>
+                </div>
                 </div>
             </div>
         </div>
@@ -163,8 +251,10 @@ body {
             <div class="portrait" id="lauren">
             </div>
             <div class="score-tube">
-                <div class="score">
-                    <div class="score-val">10</div>
+                <div class="score-wrapper">
+                    <div class="score" style="background-color: 23a369">
+                    <div class="score-val" style="color: 005826"></div>
+                </div>
                 </div>
             </div>
         </div>
@@ -172,8 +262,10 @@ body {
             <div class="portrait" id="eline">
             </div>
             <div class="score-tube">
-                <div class="score">
-                    <div class="score-val">10</div>
+                <div class="score-wrapper">
+                <div class="score" style="background-color: edd882">
+                    <div class="score-val" style="color: 7d4900"></div>
+                </div>
                 </div>
             </div>
         </div>
@@ -181,13 +273,54 @@ body {
             <div class="portrait" id="mau">
             </div>
             <div class="score-tube">
-                <div class="score">
-                    <div class="score-val">10</div>
+                <div class="score-wrapper">
+                <div class="score" style="background-color: c83820">
+                    <div class="score-val" style="color: 790000"></div>
+                </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="pic" id="quiz" onclick="window.location='quiz.html'">Back to quiz</div>
+    <div id="winner"></div>
+
+<!-- Hugrid -->
+<iframe src="https://giphy.com/embed/l3q2VTSmfyXXaBR1m" style="
+left: 110;
+top: 40;
+width: 340px;
+" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<!-- Mcgonagle -->
+<iframe src="https://giphy.com/embed/PXvCWUnmqVdks" style="
+left: 670;
+top: 480;
+width: 400px;
+" width="480" height="330" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<!-- Snape -->
+<iframe src="https://giphy.com/embed/8l1UFvNSS5SwM" style="
+left: 730px;
+top: 230px;
+width: 250px;
+" width="480" height="257" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+
+<!-- Vol -->
+<iframe src="https://giphy.com/embed/Wrd8QwEkxh5Re" style="top: 10; left: 640;" width="480" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<!-- Dance -->
+<iframe src="https://giphy.com/embed/l0MYIC3CENWKuZZjW" style="
+top: 420px;
+left: 100px;
+"width="480" height="256" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<!-- Kids -->
+<iframe src="https://giphy.com/embed/bCYK1Cmi1VCso" style="
+top: 100px;
+left: 100px;
+" width="480" height="203" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+    <div id="quiz" onclick="window.location='quiz.html'"></div>
 </body>
 </html>
