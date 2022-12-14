@@ -143,6 +143,14 @@ body {
     display: none;
 }
 
+#bath {
+    background-image: url('img/bath.png');
+    width: 110px;
+    height: 140px;
+    left: 1000px;
+    top: 574px;
+}
+
 </style>
 
 <script type="text/javascript" src="cookies.js"></script> 
@@ -196,6 +204,20 @@ body {
                 document.getElementById('choco-banner').style.display = 'block';
             }
         })
+    }
+
+    function reset() {
+        for (let item of document.getElementsByClassName("portrait")) {
+            setCookie(item.id, 0);
+            anime({
+                targets: document.getElementById('bath'),
+                rotate: '1turn',
+                duration: 1500,
+                complete: function(anim) {
+                    window.location = 'index.html';
+                }
+            })
+        }
     }
 
     function chocoHide() {
@@ -279,6 +301,7 @@ body {
     </div>
     <div class="portrait" id="choco" onclick="chocoShow()"></div>
     <div class="portrait" id="scores" onclick="window.location='end.html'"></div>
+    <div class="portrait" id="bath" onclick="reset()"></div>
     <div class="portrait" id="snacks" onclick="window.location='snacks.html'"></div>
      
  </body>
