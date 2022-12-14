@@ -162,7 +162,7 @@ body {
 
 <script>
     function score(portrait, amount) {
-        setCookie(portrait, getCookie(portrait) * 1 + amount);
+        setCookie(portrait, getCookie(portrait) * 1 + amount, 10);
     }
 
     function animateScore(portrait, text, color) {
@@ -208,7 +208,7 @@ body {
 
     function reset() {
         for (let item of document.getElementsByClassName("portrait")) {
-            setCookie(item.id, 0);
+            setCookie(item.id, 0, 10);
             anime({
                 targets: document.getElementById('bath'),
                 rotate: '1turn',
